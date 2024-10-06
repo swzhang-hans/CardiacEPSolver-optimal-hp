@@ -1,0 +1,97 @@
+<NEKTAR>
+    <EXPANSIONS>
+        <E COMPOSITE="C[0]" NUMMODES="7" FIELDS="u" TYPE="MODIFIED" />
+    </EXPANSIONS>
+    <CONDITIONS>
+        <PARAMETERS>
+            <P> TimeStep       = 0.02  </P>
+            <P> FinTime        = 15 </P>
+            <P> NumSteps       = FinTime/TimeStep            </P>
+            <P> IO_CheckSteps  = 1/TimeStep      </P>
+            <P> IO_InfoSteps   = 10              </P>
+            <P> IterativeSolverTolerance = 1e-05 </P>
+            <P> Chi = 140 </P>   <!-- larger: wavefront moves slower -->
+            <P> Cm = 0.01 </P> <!-- smaller: higher peak mag. of act. -->
+            <P> Substeps = 4 </P> <!-- Courtemanche needs about dt=0.005 -->
+            <P> o_max = 0.13341 </P>
+        </PARAMETERS>
+        
+        <SOLVERINFO>
+            <I PROPERTY="EQTYPE" VALUE="Monodomain" />
+            <I PROPERTY="CellModel" VALUE="CourtemancheRamirezNattel98" />
+            <I PROPERTY="CellModelVariant" VALUE="Original" />
+            <I PROPERTY="Projection" VALUE="Continuous"/>
+            <I PROPERTY="DiffusionAdvancement" VALUE="Implicit"/>
+            <I PROPERTY="TimeIntegrationMethod" VALUE="IMEXdirk_3_4_3"/>
+        </SOLVERINFO>
+        
+        <VARIABLES>
+            <V ID="0"> u </V>
+        </VARIABLES>
+        
+        <BOUNDARYREGIONS>
+            <B ID="0"> C[1] </B>
+        </BOUNDARYREGIONS>
+        
+        <BOUNDARYCONDITIONS>
+            <REGION REF="0">
+                <N VAR="u" VALUE="0.0" />
+            </REGION>
+        </BOUNDARYCONDITIONS>
+        
+        <FUNCTION NAME="InitialConditions">
+            <E VAR="u" VALUE="-81.19" />
+        </FUNCTION>
+        
+        <FUNCTION NAME="IsotropicConductivity">
+            <E VAR="intensity" VALUE="1" />
+        </FUNCTION>
+    </CONDITIONS>
+    
+    <STIMULI>
+        <STIMULUS ID="0" TYPE = "StimulusRect">
+            <p_x1> -2.5</p_x1>
+            <p_y1> -2.5</p_y1>
+            <p_z1> 0.0</p_z1>
+            <p_x2> 0.5</p_x2>
+            <p_y2> 3.5</p_y2>
+            <p_z2> 0.0</p_z2>
+            <p_is> 5000.0</p_is>
+            <p_strength> 20.0 </p_strength>
+            
+            <PROTOCOL TYPE = "ProtocolS1S2">
+                <START> 0.0  </START>
+                <DURATION>  2.0 </DURATION>
+                <S1CYCLELENGTH> 300.0 </S1CYCLELENGTH>
+                <NUM_S1> 2.0 </NUM_S1>
+                <S2CYCLELENGTH>100.0 </S2CYCLELENGTH>
+            </PROTOCOL>
+        </STIMULUS>
+        <!--<STIMULUS ID="0" TYPE = "StimulusCirc">
+            <p_x1> 9.8</p_x1>
+            <p_y1> 0.5</p_y1>
+            <p_z1> 0.0</p_z1>
+            <p_r1> 0.1</p_r1>
+            <p_is> 1.0</p_is>
+            <p_strength> 5.0 </p_strength>
+            
+            <PROTOCOL TYPE = "ProtocolSingle">
+                <START> 280.0  </START>
+                <DURATION>  2.0 </DURATION>
+            </PROTOCOL>
+        </STIMULUS>-->
+    </STIMULI>
+
+    <FILTERS>
+        <FILTER TYPE="HistoryPoints">
+            <PARAM NAME="OutputFile">crn.his</PARAM>
+            <PARAM NAME="OutputFrequency">1</PARAM>
+            <PARAM NAME="Points">
+                5.0 1.0 0.0
+                5.0 0.0 0.0
+            </PARAM>
+        </FILTER>
+    </FILTERS>
+
+
+</NEKTAR>
