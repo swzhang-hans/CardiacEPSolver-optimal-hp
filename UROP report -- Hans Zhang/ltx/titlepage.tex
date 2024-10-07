@@ -1,0 +1,34 @@
+\begin{titlepage}
+\begin{figure}[h] 
+\includegraphics[scale=.4]{figs/imperial-logo.pdf}
+\end{figure}
+
+
+\begin{center}
+\vspace{.5cm}
+
+\Large{\bf Investigating the optimal choice of numerical parameters for solving reaction-diffusion problems with high-order spectral/hp element methods using Nektar++. } 
+\vspace{.5cm}
+\end{center}
+
+\centering{Shiwei Zhang}
+
+\begin{abstract}
+Nektar++ is an open-source software package that uses high-order spectral/hp element method to solve a variety of partial differential equations (PDEs). Efficient discretisation allows users to achieve desired solution accuracy with minimal computation time. This paper investigates the optimal choice of element size ($h$), polynomial order ($p$), and quadrature point distribution for solving the monodomain equation—a reaction-diffusion PDE—using the CardiacEPSolver in Nektar++ 5.6.0. The results provide guidance for users in configuring parameters in CardiacEPSolver. Findings indicate that the optimal $hp$ combination is sensitive to the mathematical coefficients in the PDE: accuracy improves in more diffusion-dominated processes. Additionally, using electrostatic point distribution reduces runtime but results in poorer solution quality in capturing wavefront geometry compared to Gaussian distribution. To highlight general trends, the data were filtered and interpolated, though this may limit result reliability. Future studies should aim to explore the influence of other parameters in addition to element size and quadrature point and quantify their relationship with the mathematical coefficients of the PDE.
+\end{abstract}
+
+\vspace{.5cm}
+
+
+\begin{center}
+
+\vspace{0.5cm}
+
+{Department of Aeronautics\\
+South Kensington Campus\\
+Imperial College London\\
+London SW7 2AZ\\
+U.K.\\}
+
+\end{center}
+\end{titlepage}
